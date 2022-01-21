@@ -1,0 +1,30 @@
+<?php
+/**
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+
+/** @var $block Magento\Framework\View\Element\Template */
+?>
+<ul>
+    <li>
+        <a href="<?= $block->escapeUrl($block->getUrl('women.html')) ?>">
+            <?= $block->escapeHtml(__('Category Women')) ?></a>
+    </li>
+    <li>
+        <a href="<?= $block->escapeUrl($block->getUrl('men.html')) ?>">
+            <?= $block->escapeHtml(__('Category Men')) ?></a>
+    </li>
+    <li>
+        <a href="<?= $block->escapeUrl($block->getUrl('gear.html')) ?>">
+            <?= $block->escapeHtml(__('Category Gear')) ?></a>
+    </li>
+    <li>
+        <a href="<?= $block->escapeUrl($block->getUrl('training.html')) ?>">
+            <?= $block->escapeHtml(__('Category Training')) ?></a>
+    </li>
+    <li>
+        <a href="<?= $block->escapeUrl($block->getUrl('sale.html')) ?>">
+            <?= $block->escapeHtml(__('Category Sale')) ?></a>
+    </li>
+</ul>
