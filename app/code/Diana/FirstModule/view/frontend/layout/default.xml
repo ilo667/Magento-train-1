@@ -8,7 +8,7 @@
 <page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
     <body>
         <referenceContainer name="content">
-            <block name="block.catalog.product.view.sku.song.module" template="Diana_FirstModule::template-catalog-product-view-sku-song.phtml" />
+            <block name="first.block.via.module.default" template="Diana_FirstModule::first-template-via-module-default.phtml" />
         </referenceContainer>
     </body>
 </page>
