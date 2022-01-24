@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<layout xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_layout.xsd">
+    <update handle="2columns-right"/>
+        <referenceContainer name="div.sidebar.main">
+            <container name="list.links" htmlTag="div" after="sidebar.main" label="List of 5 links to category pages">
+                <container name="list.links.content" htmlTag="div" />
+            </container>
+        </referenceContainer>
+</layout>
