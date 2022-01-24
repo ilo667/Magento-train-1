@@ -7,8 +7,15 @@
 -->
 <page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
     <body>
-        <referenceContainer name="content">
-            <block name="block.catalog.product.view.type.downloadable.theme" template="Magento_Downloadable::template-catalog-product-view-type-downloadable.phtml" />
-        </referenceContainer>
+        <referenceBlock name="first.block.via.theme.default">
+            <arguments>
+                <argument name="type_of_layout" xsi:type="string">catalog_product_view_type_downloadable</argument>
+            </arguments>
+        </referenceBlock>
+        <referenceBlock name="first.block.via.module.default">
+            <arguments>
+                <argument name="type_of_layout" xsi:type="string">catalog_product_view_type_downloadable</argument>
+            </arguments>
+        </referenceBlock>
     </body>
 </page>
