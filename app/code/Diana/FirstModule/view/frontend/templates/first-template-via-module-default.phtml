@@ -4,9 +4,9 @@
  * See COPYING.txt for license details.
  */
 
-/** @var Magento\Framework\View\Element\Template $block */
+/** @var \Magento\Framework\View\Element\Template $block */
 ?>
-<?php if($block->getTypeOfLayout()): ?>
+<?php if ($block->getTypeOfLayout()): ?>
     <p>
         <?= $block->escapeHtml($block->getTypeOfLayout()); ?>
         <?= $block->escapeHtml(' via module'); ?>
