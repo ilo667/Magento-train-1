@@ -9,6 +9,34 @@
     <body>
         <referenceContainer name="content">
             <block name="first.block.via.module" template="Diana_FirstModule::first-template-via-module.phtml" />
+
+            <container name="container.one" htmlId="container-one" htmlClass="container-one" htmlTag="div" />
+            <container name="container.two" htmlId="container-two" htmlClass="container-two" htmlTag="div">
+                <container name="container.three" htmlId="container-three" htmlClass="container-three" htmlTag="div">
+                    <block name="block.one" template="Diana_FirstModule::block-content.phtml">
+                        <arguments>
+                            <argument name="number_of_block" xsi:type="string">1</argument>
+                        </arguments>
+                    </block>
+                    <block name="block.two" template="Diana_FirstModule::block-content.phtml" >
+                        <arguments>
+                            <argument name="number_of_block" xsi:type="string">2</argument>
+                        </arguments>
+                    </block>
+                </container>
+                <container name="container.four" htmlId="container-four" htmlClass="container-four" htmlTag="div">
+                    <block name="block.three" template="Diana_FirstModule::block-content.phtml">
+                        <arguments>
+                            <argument name="number_of_block" xsi:type="string">3</argument>
+                        </arguments>
+                    </block>
+                    <block name="block.four" template="Diana_FirstModule::block-content.phtml">
+                        <arguments>
+                            <argument name="number_of_block" xsi:type="string">4</argument>
+                        </arguments>
+                    </block>
+                </container>
+            </container>
         </referenceContainer>
     </body>
 </page>
