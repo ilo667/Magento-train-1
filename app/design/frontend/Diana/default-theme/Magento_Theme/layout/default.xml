@@ -10,7 +10,6 @@
         <referenceContainer name="content">
             <block name="first.block.via.theme.default" template="Magento_Theme::first-template-via-theme-default.phtml" />
         </referenceContainer>
-
         <referenceContainer name="list.links.content">
             <block class="Magento\Framework\View\Element\Template" name="block.list.links" template="Magento_Theme::list-links.phtml"/>
         </referenceContainer>
