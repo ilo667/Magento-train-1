@@ -6,9 +6,23 @@
  */
 -->
 <page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <head>
+        <remove src="fonts/opensans/regular/opensans-400.woff2"/>
+        <remove src="fonts/opensans/bold/opensans-700.woff2"/>
+        <remove src="fonts/opensans/light/opensans-300.woff2"/>
+        <remove src="fonts/opensans/semibold/opensans-600.woff2"/>
+        <remove src="fonts/Luma-Icons.woff2"/>
+    </head>
     <body>
         <referenceContainer name="content">
             <block name="first.block.via.theme" template="Magento_Cms::first-template-via-theme.phtml" />
         </referenceContainer>
+
+        <move element="block.four" destination="container.three" after="block.one" before="block.two" />
+        <move element="container.one" destination="container.four" before="block.three" />
+        <move element="container.four" destination="content" />
+        <move element="block.three" destination="container.one" />
+        <referenceContainer name="container.one" remove="true" />
+        <referenceBlock name="block.one" remove="true" />
     </body>
 </page>
