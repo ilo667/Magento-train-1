@@ -16,7 +16,6 @@
                         </a>
                     <?php elseif ($crumbInfo['last']) : ?>
                         <strong><?= $block->escapeHtml($crumbInfo['label']) ?></strong>
-                        <?= $block->escapeHtml(__('Template was extended.')) ?>
                     <?php else : ?>
                         <?= $block->escapeHtml($crumbInfo['label']) ?>
                     <?php endif; ?>
