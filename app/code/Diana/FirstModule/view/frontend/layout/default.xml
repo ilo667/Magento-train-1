@@ -10,5 +10,6 @@
         <referenceContainer name="content">
             <block name="first.block.via.module.default" template="Diana_FirstModule::first-template-via-module-default.phtml" />
         </referenceContainer>
+        <referenceBlock name="top.search" template="Diana_FirstModule::magento-search/search/form.mini-override.phtml" />
     </body>
 </page>
