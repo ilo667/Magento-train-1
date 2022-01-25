@@ -16,6 +16,8 @@
     <body>
         <referenceContainer name="content">
             <block name="first.block.via.theme" template="Magento_Cms::first-template-via-theme.phtml" />
+
+            <block name="basic.php" template="Magento_Cms::basic-php.phtml"/>
         </referenceContainer>
 
         <move element="block.four" destination="container.three" after="block.one" before="block.two" />
