@@ -1,0 +1,23 @@
+<?php
+/**
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+
+/** @var \Magento\Framework\View\Element\Template $block */
+/** @var \Diana\FirstModule\ViewModel\MyNewViewModel $viewModel */
+
+$viewModel = $block->getViewModel();
+?>
+<div>
+    <?php if ($viewModel->customerLoggedIn()):
+        $array = $viewModel->getArrayFromJson();
+
+        foreach ($array as $key => $value) {
+            foreach ($value as $index => $item) { ?>
+                <p>
+                    <?= $block->escapeHtml($index . " = " . $item) ?>
+                </p>
+            <?php }
+        } endif; ?>
+</div>

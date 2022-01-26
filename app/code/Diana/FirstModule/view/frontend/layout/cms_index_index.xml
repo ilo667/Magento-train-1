@@ -37,6 +37,12 @@
                     </block>
                 </container>
             </container>
+
+            <block name="block.mag.17" class="Magento\Framework\View\Element\Template" template="Diana_FirstModule::template-mag-17.phtml">
+                <arguments>
+                    <argument name="view_model" xsi:type="object">Diana\FirstModule\ViewModel\MyNewViewModel</argument>
+                </arguments>
+            </block>
         </referenceContainer>
     </body>
 </page>
