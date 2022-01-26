@@ -18,6 +18,19 @@
             <block name="first.block.via.theme" template="Magento_Cms::first-template-via-theme.phtml" />
 
             <block name="basic.php" template="Magento_Cms::basic-php.phtml"/>
+
+            <block name="block.mag.15.1" template="Magento_Cms::template-mag-15.phtml">
+                <arguments>
+                    <argument name="css_class" xsi:type="string">mag-15-1</argument>
+                    <argument name="element_content" xsi:type="string">Spring</argument>
+                </arguments>
+            </block>
+            <block name="block.mag.15.2" template="Magento_Cms::template-mag-15.phtml">
+                <arguments>
+                    <argument name="css_class" xsi:type="string">mag-15-2</argument>
+                    <argument name="element_content" xsi:type="string">Autumn</argument>
+                </arguments>
+            </block>
         </referenceContainer>
 
         <move element="block.four" destination="container.three" after="block.one" before="block.two" />
