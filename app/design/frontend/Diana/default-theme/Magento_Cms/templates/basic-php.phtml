@@ -49,19 +49,13 @@ foreach($array as $key => $value) {
             : $block->escapeHtml('Year - ' . $value['year']) ?>
     </p>
     <p>
-        <?= ($value['year'] == '2029') ?
-            $block->escapeHtml( $value['month'] . ' - Month')
-            : $block->escapeHtml('Month - ' . $value['month']) ?>
+        <?= $block->escapeHtml('Month - ' . $value['month']) ?>
     </p>
     <p>
-        <?= ($value['year'] == '2029') ?
-            $block->escapeHtml($value['day'] . ' - Day')
-            : $block->escapeHtml('Day - ' . $value['day']) ?>
+        <?= $block->escapeHtml('Day - ' . $value['day']) ?>
     </p>
     <p>
-        <?= ($value['year'] == '2029') ?
-            $block->escapeHtml($value['hours'] . ':' . $value['minutes'] . ':' . $value['seconds'] . ' - Time')
-            : $block->escapeHtml('Time: ' . $value['hours'] . ':' . $value['minutes'] . ':' . $value['seconds']) ?>
+        <?= $block->escapeHtml('Time: ' . $value['hours'] . ':' . $value['minutes'] . ':' . $value['seconds']) ?>
     </p>
 <?php
 }
