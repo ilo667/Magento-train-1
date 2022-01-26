@@ -7,7 +7,14 @@
 <script type="text/x-magento-init">
     {
         "*": {
-            "js/second-js-module":{}
+            "js/second-js-module":{},
+            "Magento_Ui/js/core/app": {
+                "components": {
+                    "firstUiComponent": {
+                        "component": "js/first-js-ui-component"
+                    }
+                }
+            }
         }
     }
 </script>
