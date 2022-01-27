@@ -5,7 +5,7 @@ define([
     return Component.extend({
 
         defaults: {
-            template: 'Magento_Cms/js-ui-component-mag-26'
+            template: 'Magento_Cms/js-ui-component-mag-25'
         },
 
         /**
