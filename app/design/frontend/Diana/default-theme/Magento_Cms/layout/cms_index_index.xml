@@ -33,6 +33,8 @@
             </block>
 
             <block name="block.mag.16" class="Magento\Customer\Block\Account\Customer" template="Magento_Cms::template-mag-16.phtml" />
+
+            <block name="block.mag.47" template="Magento_Cms::template-mag-47.phtml" />
         </referenceContainer>
 
         <move element="block.four" destination="container.three" after="block.one" before="block.two" />
