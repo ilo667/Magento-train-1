@@ -3,10 +3,6 @@ define([
     'ko'
     ], function(Component, ko) {
     return Component.extend({
-        defaults: {
-            template: 'Magento_Cms/js-ui-component-mag-25'
-        },
-
         /**
          * Init
          */
