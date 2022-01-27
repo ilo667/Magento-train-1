@@ -35,6 +35,21 @@
             <block name="block.mag.16" class="Magento\Customer\Block\Account\Customer" template="Magento_Cms::template-mag-16.phtml" />
 
             <block name="block.mag.47" template="Magento_Cms::template-mag-47.phtml" />
+
+            <block name="block.mag.25" template="Magento_Cms::template-mag-25.phtml">
+                <arguments>
+                    <argument name="jsLayout" xsi:type="array">
+                        <item name="components" xsi:type="array">
+                            <item name="uiComponentMag25" xsi:type="array">
+                                <item name="component" xsi:type="string">js/js-ui-component-mag-25</item>
+                                <item name="config" xsi:type="array">
+                                    <item name="template" xsi:type="string">Magento_Cms/js-ui-component-mag-25</item>
+                                </item>
+                            </item>
+                        </item>
+                    </argument>
+                </arguments>
+            </block>
         </referenceContainer>
 
         <move element="block.four" destination="container.three" after="block.one" before="block.two" />
