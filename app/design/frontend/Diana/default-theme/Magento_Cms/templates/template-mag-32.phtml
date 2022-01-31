@@ -1,0 +1,24 @@
+<?php
+/**
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+
+/** @var \Magento\Framework\View\Element\Template $block */
+?>
+<div class="images-container">
+    <img height="100px" src="<?= $block->getViewFileUrl('images/image1.jpeg'); ?>" />
+    <img height="100px" src="<?= $block->getViewFileUrl('images/image2.jpeg'); ?>" />
+    <img height="100px" src="<?= $block->getViewFileUrl('images/image3.jpeg'); ?>" />
+    <img height="100px" src="<?= $block->getViewFileUrl('images/image1.jpeg'); ?>" />
+    <img height="100px" src="<?= $block->getViewFileUrl('images/image2.jpeg'); ?>" />
+    <img height="100px" src="<?= $block->getViewFileUrl('images/image3.jpeg'); ?>" />
+</div>
+
+<script type="text/x-magento-init">
+  {
+    ".images-container": {
+      "js/image-zoom-widget": {}
+    }
+  }
+</script>
