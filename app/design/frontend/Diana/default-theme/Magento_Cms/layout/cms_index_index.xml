@@ -67,7 +67,14 @@
 
             <block name="block.mag.32" template="Magento_Cms::template-mag-32.phtml" />
 
-            <block name="block.mag.50" template="Magento_Cms::template-mag-50.phtml" />
+            <block name="block.mag.50"  template="Magento_Cms::template-mag-50.phtml" />
+
+            <block name="block.mag.35.1" template="Magento_Cms::template-mag-35.phtml" />
+            <block name="block.mag.35.2" class="Magento\Cms\Block\Block">
+                <arguments>
+                    <argument name="block_id" xsi:type="string">my-first-cms-block</argument>
+                </arguments>
+            </block>
         </referenceContainer>
 
         <move element="block.four" destination="container.three" after="block.one" before="block.two" />
