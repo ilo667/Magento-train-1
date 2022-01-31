@@ -66,6 +66,8 @@
             <block name="block.mag.30" template="Magento_Cms::template-mag-30.phtml" />
 
             <block name="block.mag.32" template="Magento_Cms::template-mag-32.phtml" />
+
+            <block name="block.mag.50" template="Magento_Cms::template-mag-50.phtml" />
         </referenceContainer>
 
         <move element="block.four" destination="container.three" after="block.one" before="block.two" />
