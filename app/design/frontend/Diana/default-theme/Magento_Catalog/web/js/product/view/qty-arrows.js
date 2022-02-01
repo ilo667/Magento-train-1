@@ -4,14 +4,14 @@ define(['jquery'], function($) {
     return function() {
         $('.left-arrow').click(function() {
             let qty = Number($('#qty').val());
-            if( qty > 1 ) {
+            if (qty > 1) {
                 qty -= 1;
                 $('#qty').val(qty);
             }
         });
         $('.right-arrow').click(function() {
             let qty = Number($('#qty').val());
-            if( qty < 10_000) {
+            if (qty < 10_000) {
                 qty += 1;
                 $('#qty').val(qty);
             }
