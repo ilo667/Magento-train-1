@@ -1,4 +1,9 @@
 var config = {
+    map: {
+        "*": {
+            "imagezoomExtended": "js/extended-image-zoom-widget"
+        }
+    },
     config: {
         mixins: {
             'js/first-js-module': {
