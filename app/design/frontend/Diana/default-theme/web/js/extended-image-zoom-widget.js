@@ -1,19 +1,20 @@
-define(['jquery','js/image-zoom-widget'], function($) {
+define(['jquery', 'jquery/ui', 'js/image-zoom-widget'], function($) {
     'use strict';
 
     $.widget('mage.imagezoomExtended', $.mage.imagezoom, {
         _create: function() {
             console.log('extended zoom');
-            this.element
-                .delegate("img", "mouseover", function(element) {
-                    $(element.currentTarget).siblings().css('filter', 'grayscale(100%)');
+            $(this.element)
+                .on('mouseover', 'img', function(element) {
+                    $(element.currentTarget).siblings().addClass('img-grey-scale');
                 });
-            this.element
-                .delegate("img", "mouseout", function(element) {
-                    $(element.currentTarget).siblings().css('filter', 'grayscale(0%)');
+            $(this.element)
+                .on('mouseout', 'img', function(element) {
+                    $(element.currentTarget).siblings().removeClass('img-grey-scale');
                 });
             this._super();
         }
     });
+    
     return $.mage.imagezoomExtended;
 });
