@@ -4,8 +4,8 @@ define(['jquery'], function($) {
     var imageZoomWidgetMixin = {
         _create: function () {
             this.element
-                .delegate("img", "click", function(element) {
-                    if(element.currentTarget.style.zoom == '150%') {
+                .on('click', 'img', function(element) {
+                    if($(element.currentTarget).hasClass('img-with-zoom-150')) {
                         $(element.currentTarget).siblings().animate({opacity: '1'}, "slow");
                     } else {
                         $(element.currentTarget).siblings().animate({opacity: '0.4'}, "slow");
