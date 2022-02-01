@@ -6,6 +6,9 @@ var config = {
             },
             'js/first-js-ui-component': {
                 'js/first-js-ui-component-mixin': true
+            },
+            'js/image-zoom-widget': {
+                'js/image-zoom-widget-mixin': true
             }
         }
     }
