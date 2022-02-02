@@ -1,0 +1,36 @@
+<?php
+/**
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+
+/** @var \Magento\Framework\View\Element\Template $block */
+?>
+<div class="identity-breakpoint">
+    <p>
+        <?= $block->escapeHtml(__('Block for identifying the current breakpoint.')) ?>
+    </p>
+    <ul>
+        <li>
+            <?= $block->escapeHtml('less than @screen__xxs: 320px : red') ?>
+        </li>
+        <li>
+            <?= $block->escapeHtml('less than @screen__xs: 480px  : orange') ?>
+        </li>
+        <li>
+            <?= $block->escapeHtml('less than @screen__s: 640px  : yellow') ?>
+        </li>
+        <li>
+            <?= $block->escapeHtml('less than @screen__m: 768px : green') ?>
+        </li>
+        <li>
+            <?= $block->escapeHtml('more than @screen__m: 768px : lightskyblue') ?>
+        </li>
+        <li>
+            <?= $block->escapeHtml('more than @screen__l: 1024px  : blue') ?>
+        </li>
+        <li>
+            <?= $block->escapeHtml('more than @screen__xl: 1440px  : purple') ?>
+        </li>
+    </ul>
+</div>

@@ -75,6 +75,8 @@
                     <argument name="block_id" xsi:type="string">my-first-cms-block</argument>
                 </arguments>
             </block>
+
+            <block name="block.mag.53" template="Magento_Cms::template-mag-53.phtml" />
         </referenceContainer>
 
         <move element="block.four" destination="container.three" after="block.one" before="block.two" />
