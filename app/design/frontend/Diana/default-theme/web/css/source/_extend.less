@@ -65,3 +65,16 @@
         background-color: purple;
     }
 }
+
+.media-width(@extremum, @break) when (@extremum = 'min') and (@break = @screen__xxl) {
+    .identity-breakpoint {
+        background-color: khaki;
+    }
+}
+
+.media-width(@extremum, @break) when (@extremum = 'min') and (@break = @screen__xxxl) {
+    .identity-breakpoint {
+        background-color: teal;
+    }
+}
+
