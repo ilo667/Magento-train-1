@@ -1,0 +1,34 @@
+define([
+    'jquery',
+    'matchMedia',
+    'underscore',
+    'accordion',
+    'domReady!'
+], function ($, mediaCheck, _) {
+    'use strict';
+
+        mediaCheck({
+            media: '(min-width: 768px)',
+
+            /**
+             * Switch to Desktop Version.
+             */
+            entry: function() {
+                console.log('DESKTOP');
+                var checkoutCartAccordion = $('#checkout-cart-accordion');
+                if ( !(_.isUndefined(checkoutCartAccordion.data().mageAccordion))) {
+                    checkoutCartAccordion.accordion('destroy');
+                }
+            },
+
+            /**
+             * Switch to Mobile Version.
+             */
+            exit: function () {
+                $('#shopping-cart-table').attr('data-role', 'content');
+                $('#checkout-cart-accordion').accordion({
+                    "collapsible": true
+                });
+            }
+        });
+});

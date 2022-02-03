@@ -8,7 +8,9 @@
 
 /**  @var $block \Magento\Checkout\Block\Cart\Grid */
 ?>
-<?php $mergedCells = ($this->helper(Magento\Tax\Helper\Data::class)->displayCartBothPrices() ? 2 : 1); ?>
+<?php $mergedCells = ($this->helper(Magento\Tax\Helper\Data::class)->displayCartBothPrices() ? 2 : 1);
+$qtyItemsInCart = $block->getItemsSummaryQty();
+?>
 <?= $block->getChildHtml('form_before') ?>
 <form action="<?= $block->escapeUrl($block->getUrl('checkout/cart/updatePost')) ?>"
       method="post"
@@ -25,23 +27,33 @@
                  data-attribute="cart-products-toolbar-top"><?= $block->getPagerHtml() ?>
             </div>
         <?php endif ?>
-        <table id="shopping-cart-table"
-               class="cart items data table"
-               data-mage-init='{"shoppingCart":{"emptyCartButton": ".action.clear",
+        <div id="checkout-cart-accordion" data-mage-init='{"Magento_Checkout/js/cart/checkout-cart-accordion":{}}'>
+            <div data-role="collapsible">
+                <div data-role="trigger">
+                    <button type="button">
+                        <?= $block->escapeHtml($qtyItemsInCart) ?>
+                        <?= $block->escapeHtml(__(' items in cart')) ?>
+                    </button>
+                </div>
+            </div>
+            <table id="shopping-cart-table"
+                   class="cart items data table"
+                   data-mage-init='{"shoppingCart":{"emptyCartButton": ".action.clear",
                "updateCartActionContainer": "#update_cart_action_container"}}'>
-            <caption class="table-caption"><?= $block->escapeHtml(__('Shopping Cart Items')) ?></caption>
-            <thead>
-            <tr>
-                <th class="col item" scope="col"><span><?= $block->escapeHtml(__('Item')) ?></span></th>
-                <th class="col price" scope="col"><span><?= $block->escapeHtml(__('Price')) ?></span></th>
-                <th class="col qty" scope="col"><span><?= $block->escapeHtml(__('Qty')) ?></span></th>
-                <th class="col subtotal" scope="col"><span><?= $block->escapeHtml(__('Subtotal')) ?></span></th>
-            </tr>
-            </thead>
-            <?php foreach ($block->getItems() as $_item) :?>
-                <?= $block->getItemHtml($_item) ?>
-            <?php endforeach ?>
-        </table>
+                <caption class="table-caption"><?= $block->escapeHtml(__('Shopping Cart Items')) ?></caption>
+                <thead>
+                <tr>
+                    <th class="col item" scope="col"><span><?= $block->escapeHtml(__('Item')) ?></span></th>
+                    <th class="col price" scope="col"><span><?= $block->escapeHtml(__('Price')) ?></span></th>
+                    <th class="col qty" scope="col"><span><?= $block->escapeHtml(__('Qty')) ?></span></th>
+                    <th class="col subtotal" scope="col"><span><?= $block->escapeHtml(__('Subtotal')) ?></span></th>
+                </tr>
+                </thead>
+                <?php foreach ($block->getItems() as $_item) :?>
+                    <?= $block->getItemHtml($_item) ?>
+                <?php endforeach ?>
+            </table>
+        </div>
         <?php if ($block->getPagerHtml()) :?>
             <div class="cart-products-toolbar cart-products-toolbar-bottom toolbar"
                  data-attribute="cart-products-toolbar-bottom"><?= $block->getPagerHtml() ?>
@@ -77,4 +89,3 @@
 </form>
 <?= $block->getChildHtml('checkout.cart.order.actions') ?>
 <?= $block->getChildHtml('shopping.cart.table.after') ?>
-
