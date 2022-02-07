@@ -66,9 +66,6 @@
                                                         <item name="editCartButton" xsi:type="array">
                                                             <item name="component" xsi:type="string">Magento_Checkout/js/view/summary/edit-cart-button</item>
                                                             <item name="sortOrder" xsi:type="string">80</item>
-                                                            <item name="config" xsi:type="array">
-                                                                <item name="title" xsi:type="string" translate="true">Edit Button</item>
-                                                            </item>
                                                         </item>
                                                     </item>
                                                 </item>
