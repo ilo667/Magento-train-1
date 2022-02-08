@@ -17,8 +17,8 @@ define([
         },
         cancelOrder: function () {
             confirmation({
-                title: $.mage.__('Cancel Order'),
-                content: $.mage.__('Do you really want to cancel your order?'),
+                title: $t('Cancel Order'),
+                content: $t('Do you really want to cancel your order?'),
                 buttons: [{
                     text: $t('No'),
                     class: 'action-secondary action-dismiss',
@@ -35,12 +35,6 @@ define([
                 actions: {
                     confirm: function() {
                         window.location.href = url.build('firstmodule/items/remove');
-                    },
-                    cancel: function() {
-                        console.log('cancel')
-                    },
-                    always: function() {
-                        console.log('always')
                     }
                 }
             })
