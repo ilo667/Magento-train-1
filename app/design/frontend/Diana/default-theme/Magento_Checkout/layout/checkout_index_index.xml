@@ -55,6 +55,21 @@
                                                 </item>
                                             </item>
                                         </item>
+                                        <item name="billing-step" xsi:type="array">
+                                            <item name="children" xsi:type="array">
+                                                <item name="payment" xsi:type="array">
+                                                    <item name="children" xsi:type="array">
+                                                        <item name="afterMethods" xsi:type="array">
+                                                            <item name="children" xsi:type="array">
+                                                                <item name="cancel-order" xsi:type="array">
+                                                                    <item name="component" xsi:type="string">Magento_Checkout/js/view/checkout/cancel-order</item>
+                                                                </item>
+                                                            </item>
+                                                        </item>
+                                                    </item>
+                                                </item>
+                                            </item>
+                                        </item>
                                     </item>
                                 </item>
                                 <item name="sidebar" xsi:type="array">
