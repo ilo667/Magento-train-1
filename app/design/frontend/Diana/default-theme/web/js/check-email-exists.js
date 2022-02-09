@@ -19,9 +19,9 @@ define([
             this._super();
         },
         checkEmail: function() {
-            var self = this;
-            var userEmail = this.userEmail();
-            var query = '{isEmailAvailable(email: "' + userEmail +
+            var self = this,
+            userEmail = this.userEmail(),
+            query = '{isEmailAvailable(email: "' + userEmail +
                 '" ) {is_email_available}}';
 
             if ($('.login-container .form-login').validation() && $('.login-container .form-login').validation('isValid')) {
@@ -31,15 +31,15 @@ define([
                     data: JSON.stringify({"query": query}),
                     contentType: 'application/json',
                     success: function (result) {
-                            if (!result.data.isEmailAvailable.is_email_available) {
-                                self.checkMessage($t("This email exists. Please, enter the password."));
-                                self.isPasswordVisible(true);
-                                self.isCheckEmailVisible(false);
-                                self.isCreateAccountVisible(false);
-                            } else {
-                                self.checkMessage($t("You can create an account."));
-                                self.isCreateAccountVisible(true);
-                            }
+                        if (!result.data.isEmailAvailable.is_email_available) {
+                            self.checkMessage($t("This email exists. Please, enter the password."));
+                            self.isPasswordVisible(true);
+                            self.isCheckEmailVisible(false);
+                            self.isCreateAccountVisible(false);
+                        } else {
+                            self.checkMessage($t("You can create an account."));
+                            self.isCreateAccountVisible(true);
+                        }
                     }
                 });
             }
