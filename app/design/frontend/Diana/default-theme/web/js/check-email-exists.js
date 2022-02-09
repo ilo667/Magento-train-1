@@ -19,38 +19,36 @@ define([
         initialize: function() {
             this._super();
         },
-        checkEmail : function() {
+        checkEmail: function() {
             var self = this;
             var userEmail = this.userEmail();
-            var query = `{
-                    isEmailAvailable(email: "${userEmail}" ) {
-                        is_email_available
-                    }}`;
-            $.ajax({
-                method: "POST",
-                url: url.build("graphql"),
-                data: JSON.stringify({"query": query}),
-                contentType: 'application/json',
-                success: function(result) {
-                    if (!_.isNull(result.data.isEmailAvailable)) {
-                        if(!result.data.isEmailAvailable.is_email_available) {
-                            self.checkMessage($t("This email exists. Please, enter the password."));
-                            self.isPasswordVisible(true);
-                            self.isCheckEmailVisible(false);
-                            self.isCreateAccountVisible(false);
-                        } else {
-                            self.checkMessage($t("You can create an account."));
-                            self.isCreateAccountVisible(true);
-                        }
-                    } else {
-                        self.checkMessage($t("Please, enter the correct email. E.g. 'john@example.com'."));
-                        self.isCreateAccountVisible(false);
+            var query = '{ isEmailAvailable(email: "' + userEmail +
+                '" ) {is_email_available}}';
+
+            if ($('.login-container .form-login').validation() && $('.login-container .form-login').validation('isValid')) {
+                $.ajax({
+                    method: "POST",
+                    url: url.build("graphql"),
+                    data: JSON.stringify({"query": query}),
+                    contentType: 'application/json',
+                    success: function (result) {
+                            if (!result.data.isEmailAvailable.is_email_available) {
+                                self.checkMessage($t("This email exists. Please, enter the password."));
+                                self.isPasswordVisible(true);
+                                self.isCheckEmailVisible(false);
+                                self.isCreateAccountVisible(false);
+                            } else {
+                                self.checkMessage($t("You can create an account."));
+                                self.isCreateAccountVisible(true);
+                            }
+                    },
+                    error: function (result) {
+                        console.log(result);
                     }
-                },
-                error: function(result) {
-                    console.log(result);
-                }
-            });
+                });
+            } else {
+                console.log('Email is not valid');
+            }
         }
     });
 });

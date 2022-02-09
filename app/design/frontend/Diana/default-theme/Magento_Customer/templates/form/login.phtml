@@ -12,7 +12,7 @@
     <div class="block-title">
         <strong id="block-customer-login-heading" role="heading" aria-level="2"><?= $block->escapeHtml(__('Registered Customers')) ?></strong>
     </div>
-    <div class="block-content" aria-labelledby="block-customer-login-heading" data-bind="scope: 'ifEmailExists' ">
+    <div class="block-content" aria-labelledby="block-customer-login-heading" data-bind="scope: 'checkEmailExists' ">
         <form class="form form-login"
               action="<?= $block->escapeUrl($block->getPostActionUrl()) ?>"
               method="post"
@@ -31,7 +31,7 @@
                            data-mage-init='{"mage/trim-input":{}}'
                            data-validate="{required:true, 'validate-email':true}">
                     <p data-bind="text: checkMessage"></p>
-                    <button data-bind="click: checkEmail, visible: isCheckEmailVisible">
+                    <button class="check-email-button" type="button" data-bind="click: checkEmail, visible: isCheckEmailVisible">
                         <?= $block->escapeHtml(__('Check Email')) ?>
                     </button>
                 </div>
@@ -69,7 +69,7 @@
             },
             "Magento_Ui/js/core/app": {
                 "components": {
-                    "ifEmailExists": {
+                    "checkEmailExists": {
                         "component": "js/check-email-exists"
                     }
                 }
