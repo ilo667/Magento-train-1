@@ -3,9 +3,8 @@ define([
     'ko',
     'jquery',
     'mage/url',
-    'underscore',
     'mage/translate'
-], function(Component, ko, $, url, _, $t) {
+], function(Component, ko, $, url, $t) {
     'use strict';
 
     return Component.extend({
@@ -22,7 +21,7 @@ define([
         checkEmail: function() {
             var self = this;
             var userEmail = this.userEmail();
-            var query = '{ isEmailAvailable(email: "' + userEmail +
+            var query = '{isEmailAvailable(email: "' + userEmail +
                 '" ) {is_email_available}}';
 
             if ($('.login-container .form-login').validation() && $('.login-container .form-login').validation('isValid')) {
@@ -41,13 +40,8 @@ define([
                                 self.checkMessage($t("You can create an account."));
                                 self.isCreateAccountVisible(true);
                             }
-                    },
-                    error: function (result) {
-                        console.log(result);
                     }
                 });
-            } else {
-                console.log('Email is not valid');
             }
         }
     });
