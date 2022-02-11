@@ -77,6 +77,8 @@
             </block>
 
             <block name="block.mag.53" template="Magento_Cms::template-mag-53.phtml" />
+
+            <block name="graph.slider" template="Magento_Cms::graph-slider.phtml" />
         </referenceContainer>
 
         <move element="block.four" destination="container.three" after="block.one" before="block.two" />

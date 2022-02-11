@@ -1,4 +1,12 @@
 var config = {
+    paths: {
+        slick: 'js/slick.min'
+    },
+    shim: {
+        slick: {
+            deps: ['jquery']
+        }
+    },
     map: {
         "*": {
             "imagezoomExtended": "js/extended-image-zoom-widget"
