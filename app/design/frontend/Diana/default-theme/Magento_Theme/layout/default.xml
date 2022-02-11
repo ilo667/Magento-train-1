@@ -9,9 +9,13 @@
     <body>
         <referenceContainer name="content">
             <block name="first.block.via.theme.default" template="Magento_Theme::first-template-via-theme-default.phtml" />
+            <block name="newsletter.subscribe.popup" template="Magento_Theme::newsletter-subscribe-popup.phtml" />
         </referenceContainer>
         <referenceContainer name="list.links.content">
             <block class="Magento\Framework\View\Element\Template" name="block.list.links" template="Magento_Theme::list-links.phtml"/>
+        </referenceContainer>
+        <referenceContainer name="footer">
+            <referenceBlock name="form.subscribe" remove="true" />
         </referenceContainer>
     </body>
 </page>
