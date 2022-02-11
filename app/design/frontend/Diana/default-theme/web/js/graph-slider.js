@@ -60,8 +60,8 @@ define([
                 data: JSON.stringify({"query": query}),
                 contentType: 'application/json',
                 success: function (result) {
-                    for (let item of result.data.products.items ) {
-                        if(self.products().length == qty) {
+                    for (var item of result.data.products.items ) {
+                        if (self.products().length == qty) {
                             break;
                         }
                         self.products.push(item);
@@ -75,7 +75,7 @@ define([
         },
         removeRedundantSlides: function(qtyMustKeep, previousQtyOfItemsQuery) {
             var maxI = +previousQtyOfItemsQuery + +qtyMustKeep;
-            for (let i = maxI - 1; i >= qtyMustKeep; i--) {
+            for (var i = maxI - 1; i >= qtyMustKeep; i--) {
                 $('.product-slider').slick('slickRemove', i);
             }
         },
@@ -108,7 +108,7 @@ define([
                 data: JSON.stringify({"query": query}),
                 contentType: 'application/json',
                 success: function (result) {
-                    for (let item of result.data.products.items) {
+                    for (var item of result.data.products.items) {
                         if (self.products().length == 6) {
                             break;
                         }
