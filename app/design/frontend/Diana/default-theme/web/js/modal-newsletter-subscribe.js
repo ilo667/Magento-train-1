@@ -9,12 +9,13 @@ define([
 ], function($, ko, modal, _) {
     'use strict';
 
-    return function() {
-        var newsletterPopup = $('#newsletter-popup');
+    return function(config) {
+        var newsletterPopup = $(config.idOfModalPopup);
+        var buttonSubscribeNewsletter = $(config.buttonSubscribeNewsletter);
         var options = {
             type: 'popup',
             responsive: true,
-            title: 'Subscribe',
+            title: $.mage.__('Subscribe'),
             buttons: [{
                 text: $.mage.__('Cancel'),
                 type: "submit",
@@ -25,7 +26,7 @@ define([
                 }
             }]
         };
-        $('#button-subscribe-newsletter').on('click', function() {
+        buttonSubscribeNewsletter.on('click', function() {
             $.cookie('modal-newsletter-subscribe', 'subscribe', { expires: 14 });
         });
         var popup = modal(options, newsletterPopup);
