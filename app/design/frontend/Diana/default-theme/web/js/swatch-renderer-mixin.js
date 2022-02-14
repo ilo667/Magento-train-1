@@ -39,6 +39,20 @@ define([
                 console.log('SwatchRenderer: No input data received');
             }
             this.options.tierPriceTemplate = $(this.options.tierPriceTemplateSelector).html();
+            $('.options-of-colors').dropdownDialog({
+                "appendTo": "[data-block=dropdown]",
+                "triggerTarget":"[data-trigger=trigger]",
+                "timeout": 2000,
+                "closeOnMouseLeave": false,
+                "closeOnEscape": true,
+                "autoOpen": false,
+                "triggerClass": "active",
+                "parentClass": "active",
+                "buttons": []
+            });
+            $('.swatch-option').on('click', function() {
+                $('.options-of-colors').dropdownDialog('close');
+            });
         },
 
         _RenderSwatchOptions: function (config, controlId) {
@@ -114,9 +128,9 @@ define([
                 } else if (type === 1) {
                     // Color
                     html += '<div class="' + optionClass + ' color" ' + attr +
-                        ' style="background: ' + value +
-                        ' no-repeat center; background-size: initial;">' + '' +
-                        '</div>';
+                        ' style="height:auto; display:flex; justify-content: space-between; padding:10px; width:100px;">' + '' +
+                        '<div style="width:20px;height:20px; background: ' + value +
+                        ' no-repeat center; background-size: initial; border:1px solid grey"></div>' + label + '</div>';
                 } else if (type === 2) {
                     // Image
                     html += '<div class="' + optionClass + ' image" ' + attr +
@@ -131,6 +145,17 @@ define([
                     html += '<div class="' + optionClass + '" ' + attr + '>' + label + '</div>';
                 }
             });
+            if (config.code === 'color') {
+                html = '<div data-block="dropdown" class="options-of-colors-wrapper">\n' +
+                    '    <button type="button" class="action" data-trigger="trigger">\n' +
+                    '        <span>Choose Color</span>\n' +
+                    '    </button>\n' +
+                    '</div>\n' +
+                    '<div class="options-of-colors">\n' +
+                    '    <div id="options-of-colors-content-wrapper" style="display: flex; flex-direction: column;">'.concat(html);
+
+                html = html.concat('</div></div>');
+            }
 
             return html;
         }
