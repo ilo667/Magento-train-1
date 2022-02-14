@@ -5,7 +5,6 @@
  */
 
 /** @var $block \Magento\Newsletter\Block\Subscribe */
-$idOfModalPopup = '#newsletter-popup';
 $buttonSubscribeNewsletter = '#button-subscribe-newsletter';
 ?>
 <div id="newsletter-popup" style="display: none">
@@ -49,13 +48,12 @@ $buttonSubscribeNewsletter = '#button-subscribe-newsletter';
 </div>
 <script type="text/x-magento-init">
     {
-        "*": {
+        "#newsletter-popup": {
             "Magento_Customer/js/block-submit-on-send": {
                 "formId": "newsletter-validate-detail"
             },
             "js/modal-newsletter-subscribe": {
-                "idOfModalPopup":"<?= /* @noEscape */ $idOfModalPopup; ?>",
-                "buttonSubscribeNewsletter":"<?= /* @noEscape */ $buttonSubscribeNewsletter; ?>"
+                "buttonSubscribeNewsletter": "<?= /* @noEscape */ $buttonSubscribeNewsletter; ?>"
             }
         }
     }

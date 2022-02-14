@@ -9,8 +9,7 @@ define([
 ], function($, ko, modal, _) {
     'use strict';
 
-    return function(config) {
-        var newsletterPopup = $(config.idOfModalPopup);
+    return function(config, element) {
         var buttonSubscribeNewsletter = $(config.buttonSubscribeNewsletter);
         var options = {
             type: 'popup',
@@ -29,12 +28,12 @@ define([
         buttonSubscribeNewsletter.on('click', function() {
             $.cookie('modal-newsletter-subscribe', 'subscribe', { expires: 14 });
         });
-        var popup = modal(options, newsletterPopup);
+        var popup = modal(options, element);
         if (_.isNull($.cookie('modal-newsletter-subscribe')) && (_.isNull(sessionStorage.getItem('modal-newsletter-cancel')))) {
-            newsletterPopup.show();
-            newsletterPopup.modal('openModal');
+            $(element).show();
+            $(element).modal('openModal');
         } else {
-            newsletterPopup.hide();
+            $(element).hide();
         }
     }
 });
