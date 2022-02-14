@@ -50,8 +50,9 @@ define([
                 "parentClass": "active",
                 "buttons": []
             });
-            $('.swatch-option').on('click', function() {
+            $('.swatch-option.color').on('click', function(){
                 $('.options-of-colors').dropdownDialog('close');
+                $('.options-of-colors-button span').text($(this).attr('option-label'));
             });
         },
 
@@ -146,17 +147,18 @@ define([
                 }
             });
             if (config.code === 'color') {
+                console.log(config);
                 html = '<div data-block="dropdown" class="options-of-colors-wrapper">\n' +
-                    '    <button type="button" class="action" data-trigger="trigger">\n' +
-                    '        <span>Choose Color</span>\n' +
-                    '    </button>\n' +
+                    '    <div type="button" class="action options-of-colors-button" data-trigger="trigger">\n' +
+                    '        <span>Choose Color</span> &or;\n' +
+                    '    </div>\n' +
                     '</div>\n' +
                     '<div class="options-of-colors">\n' +
                     '    <div id="options-of-colors-content-wrapper" style="display: flex; flex-direction: column;">'.concat(html);
 
                 html = html.concat('</div></div>');
             }
-
+            console.log(config);
             return html;
         }
     }

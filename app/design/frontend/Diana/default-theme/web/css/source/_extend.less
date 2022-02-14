@@ -18,6 +18,43 @@
     .swatch-option:focus {
         box-shadow: none;
     }
+
+    #options-of-colors-content-wrapper {
+        .lib-vendor-prefix-display(flex);
+        .lib-vendor-prefix-flex-direction(column);
+        .lib-css(border-color, @color-gray34);
+        border-width: 1px;
+        border-style: solid;
+        width: fit-content;
+    }
+
+    .swatch-option.color {
+        .lib-vendor-prefix-display(flex);
+        .lib-css(justify-content, space-between);
+        width: 100px;
+        border: none;
+        .lib-css(border-bottom-color, @color-gray34);
+        border-bottom-width: 1px;
+        border-bottom-style: solid;
+        margin: 0;
+    }
+
+    .options-of-colors-button {
+        .lib-vendor-prefix-display(flex);
+        .lib-css(justify-content, space-around);
+        .lib-css(border-color, @color-gray34);
+        border-width: 1px;
+        border-style: solid;
+        justify-content: space-around;
+        width: 120px;
+        margin: 0;
+        cursor: pointer;
+
+    }
+
+    .swatch-attribute.color .swatch-attribute-selected-option {
+        display: none;
+    }
 }
 
 //
