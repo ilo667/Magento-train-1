@@ -48,10 +48,12 @@ $buttonSubscribeNewsletter = '#button-subscribe-newsletter';
 </div>
 <script type="text/x-magento-init">
     {
-        "#newsletter-popup": {
+        "*": {
             "Magento_Customer/js/block-submit-on-send": {
                 "formId": "newsletter-validate-detail"
-            },
+            }
+        },
+        "#newsletter-popup" : {
             "js/modal-newsletter-subscribe": {
                 "buttonSubscribeNewsletter": "<?= /* @noEscape */ $buttonSubscribeNewsletter; ?>"
             }

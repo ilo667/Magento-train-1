@@ -28,7 +28,7 @@ define([
         buttonSubscribeNewsletter.on('click', function() {
             $.cookie('modal-newsletter-subscribe', 'subscribe', { expires: 14 });
         });
-        var popup = modal(options, element);
+        var popup = modal(options, $(element));
         if (_.isNull($.cookie('modal-newsletter-subscribe')) && (_.isNull(sessionStorage.getItem('modal-newsletter-cancel')))) {
             $(element).show();
             $(element).modal('openModal');
