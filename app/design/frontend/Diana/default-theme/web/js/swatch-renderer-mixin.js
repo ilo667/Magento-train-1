@@ -158,7 +158,7 @@ define([
 
                 html = html.concat('</div></div>');
             }
-            console.log(config);
+
             return html;
         }
     }
