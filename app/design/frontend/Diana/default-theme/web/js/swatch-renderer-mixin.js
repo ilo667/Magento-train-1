@@ -147,7 +147,6 @@ define([
                 }
             });
             if (config.code === 'color') {
-                console.log(config);
                 html = '<div data-block="dropdown" class="options-of-colors-wrapper">\n' +
                     '    <div type="button" class="action options-of-colors-button" data-trigger="trigger">\n' +
                     '        <span>Choose Color</span> &or;\n' +
