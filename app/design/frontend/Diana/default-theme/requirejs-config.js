@@ -22,6 +22,9 @@ var config = {
             },
             'js/image-zoom-widget': {
                 'js/image-zoom-widget-mixin': true
+            },
+            'Magento_Swatches/js/swatch-renderer': {
+                'js/swatch-renderer-mixin': true
             }
         }
     }
