@@ -5,12 +5,10 @@ define([
     'mage/template',
     'mage/smart-keyboard-handler',
     'mage/translate',
-    'priceUtils',
     'jquery-ui-modules/widget',
     'jquery/jquery.parsequery',
-    'mage/validation/validation',
-    'jquery/ui'
-], function($, _, dropdownDialog, mageTemplate, keyboardHandler, $t, priceUtils) {
+    'mage/validation/validation'
+], function($, _, dropdownDialog, mageTemplate, keyboardHandler, $t) {
     'use strict';
 
     var swatchRendererMixin = {
@@ -50,7 +48,7 @@ define([
                 "parentClass": "active",
                 "buttons": []
             });
-            $('.swatch-option.color').on('click', function(){
+            $('.swatch-option.color').on('click', function() {
                 $('.options-of-colors').dropdownDialog('close');
                 $('.options-of-colors-button span').text($(this).attr('option-label'));
             });
@@ -129,13 +127,13 @@ define([
                 } else if (type === 1) {
                     // Color
                     html += '<div class="' + optionClass + ' color" ' + attr +
-                        ' style="height:auto; display:flex; justify-content: space-between; padding:10px; width:100px;">' + '' +
-                        '<div style="width:20px;height:20px; background: ' + value +
-                        ' no-repeat center; background-size: initial; border:1px solid grey"></div>' + label + '</div>';
+                        ' style="height: auto; display: flex; justify-content: space-between; padding: 10px; width: 100px;">' + '' +
+                        '<div style="width: 20px; height: 20px; background: ' + value +
+                        ' no-repeat center; background-size: initial; border: 1px solid #f0f0f0"></div>' + label + '</div>';
                 } else if (type === 2) {
                     // Image
                     html += '<div class="' + optionClass + ' image" ' + attr +
-                        ' style="background: url(' + value + ') no-repeat center; background-size: initial;width:' +
+                        'style="background: url(' + value + ') no-repeat center; background-size: initial; width:' +
                         swatchImageWidth + 'px; height:' + swatchImageHeight + 'px">' + '' +
                         '</div>';
                 } else if (type === 3) {
@@ -149,13 +147,13 @@ define([
             if (config.code === 'color') {
                 html = '<div data-block="dropdown" class="options-of-colors-wrapper">\n' +
                     '    <div type="button" class="action options-of-colors-button" data-trigger="trigger">\n' +
-                    '        <span>Choose Color</span> &or;\n' +
+                    '        <span>' + $t('Choose Color') + '</span> &or;\n' +
                     '    </div>\n' +
                     '</div>\n' +
                     '<div class="options-of-colors">\n' +
-                    '    <div id="options-of-colors-content-wrapper" style="display: flex; flex-direction: column;">'.concat(html);
-
-                html = html.concat('</div></div>');
+                    '    <div id="options-of-colors-content-wrapper" style="display: flex; flex-direction: column;">'
+                    + html +
+                    '</div></div>';
             }
 
             return html;
