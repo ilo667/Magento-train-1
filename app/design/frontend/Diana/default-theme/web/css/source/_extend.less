@@ -20,29 +20,28 @@
     }
 
     #options-of-colors-content-wrapper {
+        .lib-css(border, 1px solid @color-gray34);
         .lib-vendor-prefix-display(flex);
         .lib-vendor-prefix-flex-direction(column);
-        .lib-css(border, 1px solid @color-gray34);
         width: 120px;
     }
 
     .swatch-option.color {
-        .lib-vendor-prefix-display(flex);
-        justify-content: space-between;
-        width: 100px;
-        border: none;
         .lib-css(border-bottom, 1px solid @color-gray34);
+        .lib-vendor-prefix-display(flex);
+        border: none;
+        justify-content: space-between;
         margin: 0;
+        width: 100px;
     }
 
     .options-of-colors-button {
-        .lib-vendor-prefix-display(flex);
-        .lib-css(justify-content, space-around);
         .lib-css(border, 1px solid @color-gray34);
-        justify-content: space-around;
-        width: 120px;
-        margin: 0;
+        .lib-vendor-prefix-display(flex);
         cursor: pointer;
+        justify-content: space-around;
+        margin: 0;
+        width: 120px;
     }
 
     .swatch-attribute.color {
