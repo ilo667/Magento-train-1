@@ -16,6 +16,41 @@
     .img-grey-scale {
         filter: grayscale(100%);
     }
+
+    .swatch-option:focus {
+        box-shadow: none;
+    }
+
+    #options-of-colors-content-wrapper {
+        .lib-css(border, 1px solid @color-gray34);
+        .lib-vendor-prefix-display(flex);
+        .lib-vendor-prefix-flex-direction(column);
+        width: 120px;
+    }
+
+    .swatch-option.color {
+        .lib-css(border-bottom, 1px solid @color-gray34);
+        .lib-vendor-prefix-display(flex);
+        border: none;
+        justify-content: space-between;
+        margin: 0;
+        width: 100px;
+    }
+
+    .options-of-colors-button {
+        .lib-css(border, 1px solid @color-gray34);
+        .lib-vendor-prefix-display(flex);
+        cursor: pointer;
+        justify-content: space-around;
+        margin: 0;
+        width: 120px;
+    }
+
+    .swatch-attribute.color {
+        .swatch-attribute-selected-option {
+            display: none;
+        }
+    }
 }
 
 //
