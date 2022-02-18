@@ -7,6 +7,21 @@
 -->
 <page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
     <body>
+        <referenceContainer name="header.container">
+            <container name="user.bar" htmlTag="div" htmlClass="user-bar" after="-">
+                <block name="user.bar.search" template="Magento_Theme::user-bar-search.phtml" before="-" />
+                <block class="Magento\Customer\Block\Account\AuthorizationLink" name="user.bar.account" template="Magento_Theme::user-bar-account.phtml" after="user.bar.search" />
+                <block name="user.bar.cart" template="Magento_Theme::user-bar-cart.phtml" after="-" />
+            </container>
+            <container name="content.user.bar.wrapper" htmlTag="div" htmlClass="content-user-bar-wrapper" after="-">
+                <block name="content.search.user.bar" template="Magento_Theme::content-search-user-bar.phtml" />
+                <block name="content.cart.user.bar" template="Magento_Theme::content-cart-user-bar.phtml" after="-"/>
+            </container>
+        </referenceContainer>
+        <move element="top.search" destination="content.search.user.bar" />
+        <move element="minicart" destination="content.cart.user.bar" />
+        <move element="customer" destination="user.bar.account" />
+        <referenceBlock name="wish-list-link" remove="true" />
         <referenceContainer name="content">
             <block name="first.block.via.theme.default" template="Magento_Theme::first-template-via-theme-default.phtml" />
             <block name="newsletter.subscribe.popup" class="Magento\Newsletter\Block\Subscribe" template="Magento_Theme::newsletter-subscribe-popup.phtml" />
