@@ -11,6 +11,8 @@
             <block name="first.block.via.theme.default" template="Magento_Theme::first-template-via-theme-default.phtml" />
             <block name="newsletter.subscribe.popup" class="Magento\Newsletter\Block\Subscribe" template="Magento_Theme::newsletter-subscribe-popup.phtml" />
         </referenceContainer>
+        <referenceBlock name="wishlist_sidebar" remove="true" />
+        <referenceBlock name="catalog.compare.sidebar" remove="true" />
         <referenceContainer name="list.links.content">
             <block class="Magento\Framework\View\Element\Template" name="block.list.links" template="Magento_Theme::list-links.phtml"/>
         </referenceContainer>

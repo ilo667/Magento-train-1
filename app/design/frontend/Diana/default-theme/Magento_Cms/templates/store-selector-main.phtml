@@ -1,0 +1,43 @@
+<?php
+/**
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+
+/** @var \Magento\Framework\View\Element\Template $block */
+?>
+<div data-bind="scope: 'renderStores'" class="render-stores-wrapper">
+    <h2>
+        <?= $block->escapeHtml(__('Sales are available at stores in ')) ?>
+        <span data-bind="text: headerCity"></span>
+    </h2>
+    <div class="grid-of-stores" data-bind="foreach: availableStores">
+            <div class="available-store">
+                <a data-bind="attr: {href: link}">
+                <img class="image-store" data-bind="attr: {alt: name}" height="100px" src="<?= $block->getViewFileUrl('images/example-store.jpeg'); ?>" />
+                </a>
+                <div class="description-of-store">
+                    <strong data-bind="text: name"></strong><br>
+                    <span data-bind="text: mall"></span><br>
+                    <address data-bind="text: address"></address>
+                    <br>
+                    <time data-bind="text: schedule"></time><br>
+                    <a data-bind="text: phone, attr: {href: 'tel:' + phone}"></a><br>
+                    <a class="more-details" href="attr: {href: link}"><?= $block->escapeHtml(__('More details')) ?>&#10230;</a>
+                </div>
+            </div>
+    </div>
+</div>
+<script type="text/x-magento-init">
+    {
+        "*": {
+            "Magento_Ui/js/core/app": {
+                "components": {
+                    "renderStores": {
+                        "component": "js/render-stores"
+                    }
+                }
+            }
+        }
+    }
+</script>

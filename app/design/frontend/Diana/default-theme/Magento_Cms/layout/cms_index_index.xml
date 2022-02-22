@@ -14,7 +14,16 @@
         <remove src="fonts/Luma-Icons.woff2"/>
     </head>
     <body>
+        <referenceContainer name="sidebar.main">
+            <container name="store.selector.sidebar.wrapper" htmlTag="div" htmlClass="store-selector-sidebar-wrapper">
+                <block name="store.selector.sidebar" template="Magento_Cms::store-selector-sidebar.phtml" />
+            </container>
+        </referenceContainer>
         <referenceContainer name="content">
+            <container name="store.selector.main.wrapper" htmlTag="div" htmlClass="store-selector-main-wrapper" before="-">
+                <block name="store.selector.main" template="Magento_Cms::store-selector-main.phtml" />
+            </container>
+
             <block name="first.block.via.theme" template="Magento_Cms::first-template-via-theme.phtml" />
 
             <block name="basic.php" template="Magento_Cms::basic-php.phtml"/>
