@@ -897,26 +897,75 @@ define([
                     }
                 ]
             },
+            selectedCityId: ko.observable(),
             imports: {
-                selectedCity: 'selectorCity:selectedCity'
+                selectedCity: 'selectorCity:selectedCity',
+                availableCities: 'selectorCity:availableCities'
             }
         },
         initObservable: function () {
-            this._super().observe(['selectedCity', 'availableStores']);
+            this._super().observe(['selectedCity', 'availableStores', 'availableCities']);
 
             return this;
         },
         initialize: function() {
             this._super();
+            this.setCheckedSellersFromURLParameters();
+            this.setInitialAvailableStores();
             this.showAvailableStore();
             this.filterAvailableStoresWithSeller();
+        },
+        setInitialAvailableStores: function() {
+            var self = this;
+            for (let city of self.availableCities()) {
+                if (city.label == self.selectedCity()) {
+                    self.selectedCityId(city.id);
+                }
+            }
+            self.availableStores([]);
+            for (var key in self.shops) {
+                if (self.selectedCityId() === key) {
+                    //self.availableStores = array with all stores from selected city
+                    self.shops[key].forEach(function (item, index) {
+                        self.availableStores.push(item);
+                    })
+                }
+            }
+            self.showAvailableSellers();
+        },
+        setCheckedSellersFromURLParameters: function() {
+            var self = this;
+            if (!_.isNull(window.location.search.match(/brand/))) {
+                for (var splitUrl of window.location.search.split('&')) {
+                    if (!_.isNull(splitUrl.match(/brand/))) {
+                        self.checkedSellers.push(splitUrl.split('=')[1]);
+                    }
+                }
+            }
         },
         showAvailableStore: function() {
             var self = this;
             self.selectedCity.subscribe(function(value) {
+                var url = new URL(window.location.href);
+                url.searchParams.set('city', `${value}`);
+                url.searchParams.delete('page');
+                //clear brands url parameters after changing city
+                if (!_.isNull(url.search.match(/brand\d/g))) {
+                    for (var brand of url.search.match(/brand\d/g)) {
+                        url.searchParams.delete(`${brand}`);
+                    }
+                }
+                window.history.replaceState(null, null, url);
                 if (!_.isUndefined(value)) {
+                    for (let city of self.availableCities()) {
+                        if (city.label == value) {
+                            self.selectedCityId(city.id);
+                        }
+                    }
+                    self.checkedSellers([]);
+                    self.availableStores([]);
                     for (var key in self.shops) {
-                        if(value.id === key) {
+                        if (self.selectedCityId() === key) {
                             //self.availableStores = array with all stores from selected city
                             self.shops[key].forEach(function (item, index) {
                                 self.availableStores.push(item);
@@ -929,14 +978,48 @@ define([
         },
         filterAvailableStoresWithSeller: function() {
             var self = this;
+            self.availableStores([]);
+            //if filter is selected
+            if (self.checkedSellers().length !== 0) {
+                //shops - array with all shops
+                for (var key in self.shops) {
+                    //if city ID === key in shops array
+                    if (self.selectedCityId() === key) {
+                        //shop - store item, self.shops[key] - city
+                        for (let shop of self.shops[key]) {
+                            //if selected option include name of store
+                            if (self.checkedSellers().includes(shop.name)) {
+                                //availableStores - array with filtered stores
+                                self.availableStores.push(shop);
+                            }
+                        }
+                    }
+                }
+            } else {
+                self.shops[self.selectedCityId()].forEach(function (item, index) {
+                    self.availableStores.push(item);
+                })
+            }
             self.checkedSellers.subscribe(function(value) {
+                var url = new URL(window.location.href);
+                //clear brand url parameters
+                if (!_.isNull(url.search.match(/brand\d/g))) {
+                    for (var brand of url.search.match(/brand\d/g)) {
+                        url.searchParams.delete(`${brand}`);
+                        window.history.replaceState(null, null, url);
+                    }
+                }
+                for (var key in value) {
+                    url.searchParams.set(`brand${key}`, `${value[key]}`);
+                    window.history.replaceState(null, null, url);
+                }
                 self.availableStores([]);
                 //if filter is selected
                 if (value.length !== 0) {
                     //shops - array with all shops
                     for (var key in self.shops) {
                         //if city ID === key in shops array
-                        if (self.selectedCity().id === key)  {
+                        if (self.selectedCityId() === key)  {
                             //shop - store item, self.shops[key] - city
                             for (let shop of self.shops[key]) {
                                 //if selected option include name of store
@@ -948,7 +1031,7 @@ define([
                         }
                     }
                 } else {
-                    self.shops[self.selectedCity().id].forEach(function (item, index) {
+                    self.shops[self.selectedCityId()].forEach(function (item, index) {
                         self.availableStores.push(item);
                     })
                 }
@@ -957,7 +1040,7 @@ define([
         showAvailableSellers: function () {
             var self = this;
             //clear array with sellers
-            self.availableSellers([]);
+            self.availableSellers([])
             //self.availableSellers should be always empty on this step ???
             //self.availableStores = array with all stores from selected city
             for (let store of self.availableStores()) {

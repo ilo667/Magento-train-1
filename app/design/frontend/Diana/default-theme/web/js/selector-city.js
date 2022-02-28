@@ -1,8 +1,9 @@
 define([
     'uiComponent',
     'jquery',
-    'ko'
-], function(Component, $, ko) {
+    'ko',
+    'underscore'
+], function(Component, $, ko, _) {
     'use strict';
 
     return Component.extend({
@@ -109,15 +110,31 @@ define([
                     "id": "83682",
                     "label": "Чернігів"
                 }]),
-            selectedCity: ko.observable()
+            selectedCity: ko.observable(),
+            paramCity: ko.observable()
         },
         initObservable: function () {
-            this._super().observe(['selectedCity']);
+            this._super().observe(['selectedCity', 'availableCities']);
 
             return this;
         },
         initialize: function () {
             this._super();
+            this.setInitialCity();
+        },
+        setInitialCity: function() {
+            var self = this;
+            var url = new URL(window.location.href);
+            if (!_.isNull(url.href.match(/city=./))) {
+                for (var param of url.search.split('&')) {
+                    if (!_.isNull(param.match(/city=./))) {
+                        self.paramCity(decodeURI(param.split('=')[1]));
+                    }
+                }
+                self.selectedCity(self.paramCity());
+            } else {
+                self.selectedCity('Київ') ;
+            }
         }
     });
 });

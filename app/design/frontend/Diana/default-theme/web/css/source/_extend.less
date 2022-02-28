@@ -53,18 +53,97 @@
     }
 
     .grid-of-stores {
-        display: grid;
+        .lib-vendor-prefix-display(grid);
         grid-template-columns: 1fr 1fr 1fr;
     }
 
     .render-stores-wrapper {
         .available-store {
-            display: flex;
+            .lib-vendor-prefix-display(flex);
 
             .description-of-store {
                 .more-details {
                     float: right;
                 }
+            }
+        }
+    }
+
+    .store-selector-sidebar-wrapper {
+        .sidebar-selector {
+            padding: 10px
+        }
+
+        .label-store-selector-sidebar {
+            font-weight: @font-weight__semibold;
+            margin: 10px;
+        }
+
+        .selector-city {
+            select {
+                margin: 10px;
+            }
+        }
+
+        .selector-store {
+            .available-sellers {
+                margin: 10px;
+
+                .available-sellers-checkbox-item {
+                    margin: 10px 0;
+                }
+            }
+        }
+    }
+
+    .store-selector-main-wrapper {
+        .title-store-selector {
+            text-align: center;
+        }
+
+        .grid-of-stores {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+
+            .available-store {
+                min-height: 200px;
+
+                a {
+                    color: @color-black;
+                }
+            }
+
+            .description-of-store {
+                .lib-vendor-prefix-flex-grow(1);
+                padding: 10px;
+
+                .more-details {
+                    color: @color-sky-blue1;
+                }
+            }
+        }
+
+        .pagination-wrapper {
+            .lib-vendor-prefix-display(flex);
+            align-items: center;
+            justify-content: center;
+            margin: 20px 0;
+
+            .pagination-arrow {
+                color: @color-black;
+                cursor: pointer;
+                margin: 2px;
+                text-decoration: none;
+            }
+
+            .page-number {
+                .lib-css(border, 1px solid @color-black);
+                .lib-vendor-prefix-display(inline-block);
+                cursor: pointer;
+                height: 20px;
+                margin: 5px;
+                text-align: center;
+                width: 20px;
             }
         }
     }

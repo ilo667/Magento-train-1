@@ -6,19 +6,22 @@
 
 /** @var \Magento\Framework\View\Element\Template $block */
 ?>
-<div data-bind="scope: 'selectorCity'">
-    <span>
+<div class="sidebar-selector selector-city" data-bind="scope: 'selectorCity'">
+    <span class="label-store-selector-sidebar">
         <?= $block->escapeHtml(__('Choose city')) ?>
     </span>
-    <select name="selectCity" data-bind="options: availableCities,
+    <select id='selectCity' name="selectCity" data-bind="options: availableCities,
                                          optionsText: 'label',
+                                         optionsValue: 'label',
                                          value: selectedCity">
     </select>
 </div>
-<div data-bind="scope: 'selectorStore'">
-    <span><?= $block->escapeHtml(__('Choose seller')) ?><span>
-    <div data-bind="foreach: availableSellers">
-        <div>
+<div class="sidebar-selector selector-store" data-bind="scope: 'selectorStore'">
+    <span class="label-store-selector-sidebar">
+        <?= $block->escapeHtml(__('Choose seller')) ?>
+    </span>
+    <div class="available-sellers" data-bind="foreach: availableSellers">
+        <div class="available-sellers-checkbox-item">
             <input type="checkbox" data-bind="value: $data, checked: $parent.checkedSellers" />
             <span data-bind="text: $data"></span>
         </div>
