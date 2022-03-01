@@ -20,7 +20,7 @@
         </referenceContainer>
         <move element="top.search" destination="content.search.user.bar" />
         <move element="minicart" destination="content.cart.user.bar" />
-        <move element="customer" destination="user.bar.account" />
+        <move element="customer" destination="user.bar.account.action" />
         <referenceBlock name="wish-list-link" remove="true" />
         <referenceContainer name="content">
             <block name="first.block.via.theme.default" template="Magento_Theme::first-template-via-theme-default.phtml" />
