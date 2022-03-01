@@ -18,11 +18,14 @@
                      src="<?= $block->getViewFileUrl('images/example-store.jpeg'); ?>" />
             </a>
             <div class="description-of-store">
-                <strong data-bind="text: name"></strong><br>
-                <span data-bind="text: mall"></span><br>
+                <strong data-bind="text: name"></strong>
+<!--                <br>-->
+                <span data-bind="text: mall"></span>
+<!--                <br>-->
                 <address data-bind="text: address"></address>
                 <br>
-                <time data-bind="text: schedule"></time><br>
+                <time data-bind="text: schedule"></time>
+<!--                <br>-->
                 <a data-bind="text: phone, attr: {href: 'tel:' + phone}"></a><br>
                 <a class="more-details" href="attr: {href: link}"><?= $block->escapeHtml(__('More details')) ?>&#160;&#10230;</a>
             </div>

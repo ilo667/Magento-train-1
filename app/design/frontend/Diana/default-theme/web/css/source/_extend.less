@@ -52,23 +52,6 @@
         }
     }
 
-    .grid-of-stores {
-        .lib-vendor-prefix-display(grid);
-        grid-template-columns: 1fr 1fr 1fr;
-    }
-
-    .render-stores-wrapper {
-        .available-store {
-            .lib-vendor-prefix-display(flex);
-
-            .description-of-store {
-                .more-details {
-                    float: right;
-                }
-            }
-        }
-    }
-
     .store-selector-sidebar-wrapper {
         .sidebar-selector {
             padding: 10px
@@ -102,12 +85,7 @@
         }
 
         .grid-of-stores {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-
             .available-store {
-                min-height: 200px;
-
                 a {
                     color: @color-black;
                 }
@@ -115,10 +93,13 @@
 
             .description-of-store {
                 .lib-vendor-prefix-flex-grow(1);
+                display: flex;
+                flex-direction: column;
                 padding: 10px;
 
                 .more-details {
                     color: @color-sky-blue1;
+                    text-align: end;
                 }
             }
         }
@@ -163,6 +144,12 @@
     .identity-breakpoint {
         background-color: orange;
     }
+
+    .store-selector-main-wrapper {
+        .grid-of-stores {
+            grid-template-columns: 1fr;
+        }
+    }
 }
 
 .media-width(@extremum, @break) when (@extremum = 'max') and (@break = @screen__s) {
@@ -175,6 +162,23 @@
     .identity-breakpoint {
         background-color: green;
     }
+
+    .sidebar.sidebar-main {
+        order: -1;
+    }
+
+    .store-selector-main-wrapper {
+        .grid-of-stores {
+            display: grid;
+            grid-column-gap: 8px;
+            grid-template-columns: 1fr 1fr;
+            justify-items: center;
+
+            .available-store {
+                .lib-vendor-prefix-flex-direction(column);
+            }
+        }
+    }
 }
 
 //
@@ -184,6 +188,18 @@
 .media-width(@extremum, @break) when (@extremum = 'min') and (@break = @screen__m) {
     .identity-breakpoint {
         background-color: lightskyblue;
+    }
+
+    .grid-of-stores {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        grid-column-gap: 0px;
+
+        .available-store {
+            .lib-vendor-prefix-display(flex);
+            .lib-vendor-prefix-flex-direction(row);
+            min-height: 200px;
+        }
     }
 }
 
