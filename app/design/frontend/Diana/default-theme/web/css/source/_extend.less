@@ -32,7 +32,7 @@
         .lib-css(border-bottom, 1px solid @color-gray34);
         .lib-vendor-prefix-display(flex);
         border: none;
-        justify-content: space-between;
+        justify-content: space-around;
         margin: 0;
         width: 100px;
     }
@@ -54,11 +54,11 @@
 
     .store-selector-sidebar-wrapper {
         .sidebar-selector {
-            padding: 10px
+            padding: 10px;
         }
 
         .label-store-selector-sidebar {
-            font-weight: @font-weight__semibold;
+            .lib-css(font-weight, @font-weight__semibold);
             margin: 10px;
         }
 
@@ -85,46 +85,67 @@
         }
 
         .grid-of-stores {
+            .lib-vendor-prefix-display(flex);
+            .lib-vendor-prefix-flex-wrap(wrap);
+            justify-content: space-between;
+
             .available-store {
                 a {
-                    color: @color-black;
+                    .lib-css(color, @color-black);
                 }
             }
 
             .description-of-store {
-                .lib-vendor-prefix-flex-grow(1);
-                display: flex;
-                flex-direction: column;
+                .lib-vendor-prefix-display(flex);
+                .lib-vendor-prefix-flex-direction(column);
                 padding: 10px;
+                width: 180px;
 
                 .more-details {
-                    color: @color-sky-blue1;
+                    .lib-css(color, @color-sky-blue1);
                     text-align: end;
+
+                    &::after {
+                        content: '\00A0\27F6';
+                    }
                 }
             }
         }
 
         .pagination-wrapper {
+            .lib-vendor-box-align(center);
             .lib-vendor-prefix-display(flex);
-            align-items: center;
             justify-content: center;
             margin: 20px 0;
 
             .pagination-arrow {
-                color: @color-black;
+                .lib-css(color, @color-black);
                 cursor: pointer;
                 margin: 2px;
                 text-decoration: none;
+
+                &.link-previous-page::after {
+                    content: '\003C';
+                }
+
+                &.link-next-page::after {
+                    content: '\003E';
+                }
             }
 
             .page-number {
                 .lib-css(border, 1px solid @color-black);
-                .lib-vendor-prefix-display(inline-block);
+                .lib-css(font-weight, @font-weight__regular);
                 cursor: pointer;
+                display: inline-block;
                 height: 20px;
                 margin: 5px;
                 text-align: center;
                 width: 20px;
+
+                &.is-current {
+                    .lib-css(font-weight, @font-weight__bold);
+                }
             }
         }
     }
@@ -147,7 +168,10 @@
 
     .store-selector-main-wrapper {
         .grid-of-stores {
-            grid-template-columns: 1fr;
+            .available-store {
+                .lib-vendor-prefix-display(flex);
+                .lib-vendor-prefix-flex-direction(column);
+            }
         }
     }
 }
@@ -164,20 +188,7 @@
     }
 
     .sidebar.sidebar-main {
-        order: -1;
-    }
-
-    .store-selector-main-wrapper {
-        .grid-of-stores {
-            display: grid;
-            grid-column-gap: 8px;
-            grid-template-columns: 1fr 1fr;
-            justify-items: center;
-
-            .available-store {
-                .lib-vendor-prefix-flex-direction(column);
-            }
-        }
+        .lib-vendor-prefix-order(-1);
     }
 }
 
@@ -190,15 +201,12 @@
         background-color: lightskyblue;
     }
 
-    .grid-of-stores {
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-        grid-column-gap: 0px;
-
-        .available-store {
-            .lib-vendor-prefix-display(flex);
-            .lib-vendor-prefix-flex-direction(row);
-            min-height: 200px;
+    .store-selector-main-wrapper {
+        .grid-of-stores {
+            .available-store {
+                .lib-vendor-prefix-display(flex);
+                .lib-vendor-prefix-flex-direction(row);
+            }
         }
     }
 }

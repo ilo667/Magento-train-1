@@ -899,7 +899,9 @@ define([
             },
             selectedCityId: ko.observable(),
             imports: {
+                // Observable variable of selected city by user
                 selectedCity: 'selectorCity:selectedCity',
+                // Observable array with all available cities
                 availableCities: 'selectorCity:availableCities'
             }
         },
@@ -910,32 +912,32 @@ define([
         },
         initialize: function() {
             this._super();
-            this.setCheckedSellersFromURLParameters();
-            this.setInitialAvailableStores();
-            this.showAvailableStore();
+            this.setCheckedSellersFromURLParam();
+            this.setAvailableStores();
+            this.showAvailableStores();
             this.filterAvailableStoresWithSeller();
         },
-        setInitialAvailableStores: function() {
+        setAvailableStores: function() {
             var self = this;
-            for (let city of self.availableCities()) {
-                if (city.label == self.selectedCity()) {
-                    self.selectedCityId(city.id);
+
+            for (let city of this.availableCities()) {
+                if (city.label == this.selectedCity()) {
+                    this.selectedCityId(city.id);
                 }
             }
-            self.availableStores([]);
-            for (var key in self.shops) {
-                if (self.selectedCityId() === key) {
-                    //self.availableStores = array with all stores from selected city
-                    self.shops[key].forEach(function (item, index) {
+            this.availableStores([]);
+            for (var key in this.shops) {
+                if (this.selectedCityId() === key) {
+                    this.shops[key].forEach(function (item, index) {
                         self.availableStores.push(item);
-                    })
+                    });
                 }
             }
-            self.showAvailableSellers();
+            this.showAvailableSellers();
         },
-        setCheckedSellersFromURLParameters: function() {
+        setCheckedSellersFromURLParam: function() {
             var self = this;
-            if (!_.isNull(window.location.search.match(/brand/))) {
+            if (window.location.search.includes('brand')) {
                 for (var splitUrl of window.location.search.split('&')) {
                     if (!_.isNull(splitUrl.match(/brand/))) {
                         self.checkedSellers.push(splitUrl.split('=')[1]);
@@ -943,16 +945,15 @@ define([
                 }
             }
         },
-        showAvailableStore: function() {
+        showAvailableStores: function() {
             var self = this;
-            self.selectedCity.subscribe(function(value) {
+            this.selectedCity.subscribe(function(value) {
                 var url = new URL(window.location.href);
-                url.searchParams.set('city', `${value}`);
+                url.searchParams.set('city', value);
                 url.searchParams.delete('page');
-                //clear brands url parameters after changing city
                 if (!_.isNull(url.search.match(/brand\d/g))) {
                     for (var brand of url.search.match(/brand\d/g)) {
-                        url.searchParams.delete(`${brand}`);
+                        url.searchParams.delete(brand);
                     }
                 }
                 window.history.replaceState(null, null, url);
@@ -966,10 +967,9 @@ define([
                     self.availableStores([]);
                     for (var key in self.shops) {
                         if (self.selectedCityId() === key) {
-                            //self.availableStores = array with all stores from selected city
                             self.shops[key].forEach(function (item, index) {
                                 self.availableStores.push(item);
-                            })
+                            });
                         }
                     }
                     self.showAvailableSellers();
@@ -978,9 +978,9 @@ define([
         },
         filterAvailableStoresWithSeller: function() {
             var self = this;
-            self.availableStores([]);
+            this.availableStores([]);
             //if filter is selected
-            if (self.checkedSellers().length !== 0) {
+            if (this.checkedSellers().length !== 0) {
                 //shops - array with all shops
                 for (var key in self.shops) {
                     //if city ID === key in shops array
@@ -996,11 +996,11 @@ define([
                     }
                 }
             } else {
-                self.shops[self.selectedCityId()].forEach(function (item, index) {
+                this.shops[this.selectedCityId()].forEach(function (item, index) {
                     self.availableStores.push(item);
                 })
             }
-            self.checkedSellers.subscribe(function(value) {
+            this.checkedSellers.subscribe(function(value) {
                 var url = new URL(window.location.href);
                 //clear brand url parameters
                 if (!_.isNull(url.search.match(/brand\d/g))) {
@@ -1038,16 +1038,15 @@ define([
             });
         },
         showAvailableSellers: function () {
-            var self = this;
             //clear array with sellers
-            self.availableSellers([])
-            //self.availableSellers should be always empty on this step ???
-            //self.availableStores = array with all stores from selected city
-            for (let store of self.availableStores()) {
+            this.availableSellers([])
+            //this.availableSellers should be always empty on this step
+            //this.availableStores = array with all stores from selected city
+            for (let store of this.availableStores()) {
                 //if self.availableSellers includes name of store
-                //self.availableSellers should include unique value
-                if (!self.availableSellers().includes(store.name)) {
-                    self.availableSellers.push(store.name);
+                //this.availableSellers should include unique value
+                if (!this.availableSellers().includes(store.name)) {
+                    this.availableSellers.push(store.name);
                 }
             }
         }

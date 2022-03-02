@@ -10,15 +10,17 @@ define([
 
     return Component.extend({
         defaults: {
-            currentPageNumber: ko.observable(0),
+            currentPageNumber: ko.observable(1),
             elementsPerPage: 6,
             quantityOfPages: ko.observable(),
             quantityOfPagesRenderer: ko.observableArray([]),
-            paginatedElements: ko.observableArray(),
+            paginatedElements: ko.observableArray([]),
             selectedCity: ko.observable(),
             paramPage: ko.observable(),
             imports: {
+                // Observable variable of selected city by user
                 selectedCity: 'selectorCity:selectedCity',
+                // Observable array with all available stores filtered with selected city and brand
                 availableStores: 'selectorStore:availableStores'
             }
         },
@@ -29,95 +31,84 @@ define([
         },
         initialize: function() {
             var self = this;
+
             this._super();
-            self.setInitialCurrentPageFromURLParameters();
-            self.computeQuantityOfPages(self.availableStores());
-            self.renderPaginatedElements(self.availableStores());
-            self.availableStores.subscribe(function(value) {
+            this.setCurrentPageFromURLParam();
+            this.computeQuantityOfPages(this.availableStores());
+            this.renderPaginatedElements(this.availableStores());
+            this.availableStores.subscribe(function(value) {
                 if (!_.isUndefined(value)) {
                     self.computeQuantityOfPages(self.availableStores());
                     self.renderPaginatedElements(self.availableStores());
                 }
             });
         },
-        setInitialCurrentPageFromURLParameters: function () {
-            var self = this;
+        setCurrentPageFromURLParam: function () {
             var url = new URL(window.location.href);
+
             if (!_.isNull(url.href.match(/page=\d/))) {
-                self.paramPage(url.href.match(/page=\d/)[0].match(/\d/)[0]);
-                self.currentPageNumber(self.paramPage() - 1);
+                this.paramPage(url.href.match(/page=\d/)[0].match(/\d/)[0]);
+                this.currentPageNumber(this.paramPage());
             } else {
-                self.paramPage(null);
-                self.currentPageNumber(0);
+                this.paramPage(null);
+                this.currentPageNumber(1);
             }
         },
         computeQuantityOfPages: function (data) {
             var self = this;
-            self.quantityOfPagesRenderer([]);
-            self.quantityOfPages = ko.computed(function() {
-                var quantityOfPages = Math.ceil(data.length / self.elementsPerPage);
-                return quantityOfPages;
+
+            this.quantityOfPagesRenderer([]);
+            this.quantityOfPages = ko.computed(function() {
+                return Math.ceil(data.length / self.elementsPerPage);
             });
-            for (var i = 1; i <= self.quantityOfPages(); i++) {
-                var isCurrent = (+self.currentPageNumber() + 1 == i);
-                self.quantityOfPagesRenderer.push({
+            for (var i = 1; i <= this.quantityOfPages(); i++) {
+                var isCurrent = (+this.currentPageNumber() == i);
+                this.quantityOfPagesRenderer.push({
                     numberOfPage: i,
                     isCurrent: ko.observable(isCurrent)
                 });
             }
         },
         renderPaginatedElements: function(data) {
-            var self = this;
-            var firstPaginatedElement = self.currentPageNumber() * self.elementsPerPage;
-            self.paginatedElements([]);
-            if (self.quantityOfPages() === 1) {
-                for (var item of self.availableStores()) {
-                    self.paginatedElements.push(item)
+            var firstPaginatedElement = (this.currentPageNumber() - 1) * this.elementsPerPage;
+
+            this.paginatedElements([]);
+            if (this.quantityOfPages() === 1) {
+                for (var item of this.availableStores()) {
+                    this.paginatedElements.push(item);
                 }
             } else {
-                var paginatedElements = data.slice(firstPaginatedElement, firstPaginatedElement + self.elementsPerPage);
+                var paginatedElements = data.slice(firstPaginatedElement, firstPaginatedElement + this.elementsPerPage);
                 for (var item of paginatedElements) {
-                    self.paginatedElements.push(item);
+                    this.paginatedElements.push(item);
                 }
             }
         },
+
+        setPage: function (targetPageNumber) {
+            var url = new URL(window.location.href);
+            var currentPageNumber = this.currentPageNumber();
+
+            url.searchParams.set('page', targetPageNumber);
+            window.history.replaceState(null, null, url);
+            this.currentPageNumber(targetPageNumber);
+            this.renderPaginatedElements(this.availableStores());
+            this.quantityOfPagesRenderer()[currentPageNumber - 1].isCurrent(false);
+            this.quantityOfPagesRenderer()[this.currentPageNumber() - 1].isCurrent(true);
+        },
+
         nextPage: function (element, event) {
-            var self = this;
-            var currentPageNumber = self.currentPageNumber();
-            if (currentPageNumber < self.quantityOfPages() - 1) {
-                self.currentPageNumber(currentPageNumber + 1);
-                self.renderPaginatedElements(self.availableStores());
-                self.quantityOfPagesRenderer()[currentPageNumber].isCurrent(false);
-                self.quantityOfPagesRenderer()[self.currentPageNumber()].isCurrent(true);
-                var url = new URL(window.location.href);
-                url.searchParams.set('page', `${currentPageNumber + 2}`);
-                window.history.replaceState(null, null, url);
+            if (this.currentPageNumber() < this.quantityOfPages()) {
+                this.setPage(this.currentPageNumber() + 1);
             }
         },
         previousPage: function() {
-            var self = this;
-            var currentPageNumber = self.currentPageNumber();
-            if (currentPageNumber > 0) {
-                self.currentPageNumber(currentPageNumber - 1);
-                self.renderPaginatedElements(self.availableStores());
-                self.quantityOfPagesRenderer()[currentPageNumber].isCurrent(false);
-                self.quantityOfPagesRenderer()[self.currentPageNumber()].isCurrent(true);
-                var url = new URL(window.location.href);
-                url.searchParams.set('page', `${currentPageNumber}`);
-                window.history.replaceState(null, null, url);
+            if (this.currentPageNumber() > 1) {
+                this.setPage(this.currentPageNumber() - 1);
             }
         },
         linkToPageNumber: function(element, event) {
-            var self = this;
-            var targetPageNumber = element.numberOfPage;
-            var url = new URL(window.location.href);
-            url.searchParams.set('page', `${targetPageNumber}`);
-            window.history.replaceState(null, null, url);
-            var currentPageNumber = self.currentPageNumber();
-            self.currentPageNumber(targetPageNumber - 1);
-            self.renderPaginatedElements(self.availableStores());
-            self.quantityOfPagesRenderer()[currentPageNumber].isCurrent(false);
-            self.quantityOfPagesRenderer()[self.currentPageNumber()].isCurrent(true);
+            this.setPage(element.numberOfPage);
         }
     });
 });
