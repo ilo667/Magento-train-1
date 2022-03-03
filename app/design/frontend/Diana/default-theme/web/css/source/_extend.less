@@ -51,104 +51,6 @@
             display: none;
         }
     }
-
-    .store-selector-sidebar-wrapper {
-        .sidebar-selector {
-            padding: 10px;
-        }
-
-        .label-store-selector-sidebar {
-            .lib-css(font-weight, @font-weight__semibold);
-            margin: 10px;
-        }
-
-        .selector-city {
-            select {
-                margin: 10px;
-            }
-        }
-
-        .selector-store {
-            .available-sellers {
-                margin: 10px;
-
-                .available-sellers-checkbox-item {
-                    margin: 10px 0;
-                }
-            }
-        }
-    }
-
-    .store-selector-main-wrapper {
-        .title-store-selector {
-            text-align: center;
-        }
-
-        .grid-of-stores {
-            .lib-vendor-prefix-display(flex);
-            .lib-vendor-prefix-flex-wrap(wrap);
-            justify-content: space-between;
-
-            .available-store {
-                a {
-                    .lib-css(color, @color-black);
-                }
-            }
-
-            .description-of-store {
-                .lib-vendor-prefix-display(flex);
-                .lib-vendor-prefix-flex-direction(column);
-                padding: 10px;
-                width: 180px;
-
-                .more-details {
-                    .lib-css(color, @color-sky-blue1);
-                    text-align: end;
-
-                    &::after {
-                        content: '\00A0\27F6';
-                    }
-                }
-            }
-        }
-
-        .pagination-wrapper {
-            .lib-vendor-box-align(center);
-            .lib-vendor-prefix-display(flex);
-            justify-content: center;
-            margin: 20px 0;
-
-            .pagination-arrow {
-                .lib-css(color, @color-black);
-                cursor: pointer;
-                margin: 2px;
-                text-decoration: none;
-
-                &.link-previous-page::after {
-                    content: '\003C';
-                }
-
-                &.link-next-page::after {
-                    content: '\003E';
-                }
-            }
-
-            .page-number {
-                .lib-css(border, 1px solid @color-black);
-                .lib-css(font-weight, @font-weight__regular);
-                cursor: pointer;
-                display: inline-block;
-                height: 20px;
-                margin: 5px;
-                text-align: center;
-                width: 20px;
-
-                &.is-current {
-                    .lib-css(font-weight, @font-weight__bold);
-                }
-            }
-        }
-    }
 }
 
 //
@@ -165,15 +67,6 @@
     .identity-breakpoint {
         background-color: orange;
     }
-
-    .store-selector-main-wrapper {
-        .grid-of-stores {
-            .available-store {
-                .lib-vendor-prefix-display(flex);
-                .lib-vendor-prefix-flex-direction(column);
-            }
-        }
-    }
 }
 
 .media-width(@extremum, @break) when (@extremum = 'max') and (@break = @screen__s) {
@@ -186,10 +79,6 @@
     .identity-breakpoint {
         background-color: green;
     }
-
-    .sidebar.sidebar-main {
-        .lib-vendor-prefix-order(-1);
-    }
 }
 
 //
@@ -199,15 +88,6 @@
 .media-width(@extremum, @break) when (@extremum = 'min') and (@break = @screen__m) {
     .identity-breakpoint {
         background-color: lightskyblue;
-    }
-
-    .store-selector-main-wrapper {
-        .grid-of-stores {
-            .available-store {
-                .lib-vendor-prefix-display(flex);
-                .lib-vendor-prefix-flex-direction(row);
-            }
-        }
     }
 }
 
