@@ -1,0 +1,54 @@
+<?php
+/**
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+
+/** @var \Magento\Framework\View\Element\Template $block */
+?>
+<div data-bind="scope: 'renderStores'" class="render-stores-wrapper">
+    <h2 class="title-store-selector">
+        <span data-bind="i18n: 'Sales are available at stores in '"></span>
+        <span data-bind="text: selectedCity"></span>
+    </h2>
+    <div class="grid-of-stores" data-bind="foreach: paginatedElements">
+        <div class="available-store">
+            <a data-bind="attr: {href: link}">
+                <img class="image-store"
+                     data-bind="attr: {alt: name, src: require.toUrl('images/example-store.jpeg')}"
+                     width="180px"/>
+            </a>
+            <div class="description-of-store">
+                <strong data-bind="text: name"></strong>
+                <span data-bind="text: mall"></span>
+                <address data-bind="text: address"></address>
+                <br>
+                <time data-bind="text: schedule"></time>
+                <a data-bind="text: phone, attr: {href: 'tel:' + phone}"></a><br>
+                <a class="more-details" data-bind="attr: {href: link}, i18n: 'More details'"></a>
+            </div>
+        </div>
+    </div>
+    <div class="pagination-wrapper">
+        <a class="pagination-arrow link-previous-page" data-bind="click: previousPage"></a>
+        <span data-bind="foreach: quantityOfPagesRenderer">
+            <span class="page-number"
+                  data-bind="text: numberOfPage, click: $parent.linkToPageNumber.bind($parent), css: { 'is-current' : isCurrent() }">
+            </span>
+        </span>
+        <a class="pagination-arrow link-next-page" data-bind="click: nextPage"></a>
+    </div>
+</div>
+<script type="text/x-magento-init">
+    {
+        "*": {
+            "Magento_Ui/js/core/app": {
+                "components": {
+                    "renderStores": {
+                        "component": "js/render-stores"
+                    }
+                }
+            }
+        }
+    }
+</script>

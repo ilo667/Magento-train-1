@@ -1,0 +1,40 @@
+<?php
+/**
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+
+/** @var \Magento\Framework\View\Element\Template $block */
+?>
+<div class="sidebar-selector selector-city" data-bind="scope: 'selectorCity'">
+    <span class="label-store-selector-sidebar" data-bind="i18n: 'Choose city'">
+    </span>
+    <select id='selectCity' name="selectCity"
+            data-bind="options: availableCities, optionsText: 'label', optionsValue: 'label', value: selectedCity">
+    </select>
+</div>
+<div class="sidebar-selector selector-store" data-bind="scope: 'selectorStore'">
+    <span class="label-store-selector-sidebar" data-bind="i18n: 'Choose seller'"></span>
+    <div class="available-sellers" data-bind="foreach: availableSellers">
+        <div class="available-sellers-checkbox-item">
+            <input type="checkbox" data-bind="value: $data, checked: $parent.checkedSellers" />
+            <span data-bind="text: $data"></span>
+        </div>
+    </div>
+</div>
+<script type="text/x-magento-init">
+    {
+        "*": {
+            "Magento_Ui/js/core/app": {
+                "components": {
+                    "selectorCity": {
+                        "component": "js/selector-city"
+                    },
+                    "selectorStore": {
+                        "component": "js/selector-store"
+                    }
+                }
+            }
+        }
+    }
+</script>
