@@ -16,44 +16,57 @@ define([
             quantityOfPagesRenderer: ko.observableArray([]),
             paginatedElements: ko.observableArray([]),
             selectedCity: ko.observable(),
-            paramPage: ko.observable(),
             imports: {
-                // Observable variable of selected city by user
                 selectedCity: 'selectorCity:selectedCity',
-                // Observable array with all available stores filtered with selected city and brand
                 availableStores: 'selectorStore:availableStores'
             }
         },
+
+        /**
+         * Init observable variables
+         * @return {Object}
+         */
         initObservable: function () {
             this._super().observe(['selectedCity', 'availableStores']);
 
             return this;
         },
+
         initialize: function() {
             var self = this;
 
             this._super();
-            this.setCurrentPageFromURLParam();
+
+            this.setInitialPage();
             this.computeQuantityOfPages(this.availableStores());
-            this.renderPaginatedElements(this.availableStores());
+            this.renderPaginatedData(this.availableStores());
             this.availableStores.subscribe(function(value) {
                 if (!_.isUndefined(value)) {
                     self.computeQuantityOfPages(self.availableStores());
-                    self.renderPaginatedElements(self.availableStores());
+                    self.renderPaginatedData(self.availableStores());
                 }
             });
         },
-        setCurrentPageFromURLParam: function () {
+
+        /**
+         * Set current page from URL parameters as the previous checked page before reloading page
+         * Set default current page if URL parameters are absent
+         */
+        setInitialPage: function () {
             var url = new URL(window.location.href);
 
             if (!_.isNull(url.href.match(/page=\d/))) {
-                this.paramPage(url.href.match(/page=\d/)[0].match(/\d/)[0]);
-                this.currentPageNumber(this.paramPage());
+                var paramPage = url.href.match(/page=\d/)[0].match(/\d/)[0];
+                this.currentPageNumber(paramPage);
             } else {
-                this.paramPage(null);
                 this.currentPageNumber(1);
             }
         },
+
+        /**
+         * Compute quantity of pages of data which is to be paginated
+         * @param data
+         */
         computeQuantityOfPages: function (data) {
             var self = this;
 
@@ -61,6 +74,7 @@ define([
             this.quantityOfPages = ko.computed(function() {
                 return Math.ceil(data.length / self.elementsPerPage);
             });
+
             for (var i = 1; i <= this.quantityOfPages(); i++) {
                 var isCurrent = (+this.currentPageNumber() == i);
                 this.quantityOfPagesRenderer.push({
@@ -69,7 +83,12 @@ define([
                 });
             }
         },
-        renderPaginatedElements: function(data) {
+
+        /**
+         * Render paginated data which are shown on the current page
+         * @param data
+         */
+        renderPaginatedData: function(data) {
             var firstPaginatedElement = (this.currentPageNumber() - 1) * this.elementsPerPage;
 
             this.paginatedElements([]);
@@ -85,28 +104,44 @@ define([
             }
         },
 
-        setPage: function (targetPageNumber) {
-            var url = new URL(window.location.href);
+        /**
+         * Set a current page number as a target page number
+         * @param targetPage
+         */
+        setPage: function (targetPage) {
             var currentPageNumber = this.currentPageNumber();
+            var url = new URL(window.location.href);
 
-            url.searchParams.set('page', targetPageNumber);
+            url.searchParams.set('page', targetPage);
             window.history.replaceState(null, null, url);
-            this.currentPageNumber(targetPageNumber);
-            this.renderPaginatedElements(this.availableStores());
+
+            this.currentPageNumber(targetPage);
+            this.renderPaginatedData(this.availableStores());
             this.quantityOfPagesRenderer()[currentPageNumber - 1].isCurrent(false);
             this.quantityOfPagesRenderer()[this.currentPageNumber() - 1].isCurrent(true);
         },
 
-        nextPage: function (element, event) {
+        /**
+         * Set a current page number as a next page number
+         */
+        nextPage: function () {
             if (this.currentPageNumber() < this.quantityOfPages()) {
                 this.setPage(this.currentPageNumber() + 1);
             }
         },
+
+        /**
+         * Set a current page number as a next previous number
+         */
         previousPage: function() {
             if (this.currentPageNumber() > 1) {
                 this.setPage(this.currentPageNumber() - 1);
             }
         },
+
+        /**
+         * Set a current page number as a clicked page number
+         */
         linkToPageNumber: function(element, event) {
             this.setPage(element.numberOfPage);
         }

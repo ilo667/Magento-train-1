@@ -110,17 +110,36 @@ define([
                     "id": "83682",
                     "label": "Чернігів"
                 }]),
-            selectedCity: ko.observable()
+            selectedCity: ko.observable(),
+            defaultCity: ko.observable()
         },
+
+        /**
+         * Init observable variables
+         * @returns {Object}
+         */
         initObservable: function () {
-            this._super().observe(['selectedCity', 'availableCities']);
+            this._super()
+                .observe([
+                    'selectedCity',
+                    'availableCities'
+                ]);
 
             return this;
         },
+
         initialize: function () {
             this._super();
-            this.setInitialCity('Київ');
+
+            this.defaultCity(this.availableCities()[0].label);
+            this.setInitialCity(this.defaultCity());
         },
+
+        /**
+         * Set initial checked city from URL parameter after reloading page if parameter exists
+         * Set default checked city if URL parameter doesn't exist
+         * @param {String} defaultCity
+         */
         setInitialCity: function(defaultCity) {
             var url = new URL(window.location.href);
 
